@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="ShkoOnline" constructor="TOTPQRGenerator" version="0.0.1" display-name-key="TOTPQRGenerator" description-key="TOTPQRGenerator description" control-type="standard" >
+
+    <external-service-usage enabled="false">
+    </external-service-usage>
+
+    <property name="Application" display-name-key="Application_Display_Key" description-key="Application_Desc_Key" of-type="SingleLine.Text" usage="input" required="true" />
+    <property name="User" display-name-key="User_Display_Key" description-key="User_Desc_Key" of-type="SingleLine.Text" usage="input" required="true" />
+    <property name="Secret" display-name-key="Secret_Display_Key" description-key="Secret_Desc_Key" of-type="SingleLine.Text" usage="bound" required="true" />
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <resx path="strings/TOTPQRGenerator.1033.resx" version="1.0.0" />   
+    </resources>
+
+  </control>
+</manifest>
