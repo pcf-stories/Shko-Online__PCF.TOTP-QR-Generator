@@ -1,5 +1,5 @@
+import type { IAppProps } from "./App.types";
 import React from "react";
-import { IAppProps } from "./App.types";
 import QRCode from "react-qr-code";
 
 const App = (props: IAppProps) => (
