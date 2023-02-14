@@ -1,17 +1,19 @@
-import { IInputs, IOutputs } from "./generated/ManifestTypes";
+import type { IInputs, IOutputs } from "./generated/ManifestTypes";
+import type { Root } from "react-dom/client";
+
 import { createElement } from "react";
-import { render } from "react-dom";
+import { createRoot } from "react-dom/client";
 import App from "./App";
-import { generateSecret, generateUri } from "@sunknudsen/totp";
+import { authenticator } from "otplib";
 
 export class TOTPQRGenerator
   implements ComponentFramework.StandardControl<IInputs, IOutputs>
 {
+  private _application: string;
   private _notifyOutputChanged: () => void;
-  private _container: HTMLDivElement;
-  private user: string;
-  private application: string;
-  private secret: string;
+  private _root: Root;
+  private _secret: string;
+  private _user: string;
   /**
    * Empty constructor.
    */
@@ -31,14 +33,9 @@ export class TOTPQRGenerator
     state: ComponentFramework.Dictionary,
     container: HTMLDivElement
   ): void {
-    this.updateParameters(context);
     this._notifyOutputChanged = notifyOutputChanged;
-    this._container = container;
-
-    render(
-      this.QRCodeGenerator(this.application, this.user, this.secret),
-      container
-    );
+    this._root = createRoot(container);
+    this._Render(context);
   }
 
   /**
@@ -46,10 +43,7 @@ export class TOTPQRGenerator
    * @param context The entire property bag available to control via Context Object; It contains values as set up by the customizer mapped to names defined in the manifest, as well as utility functions
    */
   public updateView(context: ComponentFramework.Context<IInputs>): void {
-    render(
-      this.QRCodeGenerator(this.application, this.user, this.secret),
-      this._container
-    );
+    this._Render(context);
   }
 
   /**
@@ -58,30 +52,41 @@ export class TOTPQRGenerator
    */
   public getOutputs(): IOutputs {
     return {
-      Secret: this.secret,
+      Secret: this._secret,
     };
   }
 
   public destroy(): void {}
-  public QRCodeGenerator(application: string, user: string, secret: string) {
+
+  private _Render(context: ComponentFramework.Context<IInputs>): void {
+    this._application = context.parameters.Application.raw || "";
+    this._user = context.parameters.User.raw || "";
+    this._secret = context.parameters.Secret.raw || "";
+
     const app = createElement(
       App,
       {
-        value: generateUri(application, user, secret, application),
-        setNewSecret: this.newSecret.bind(this),
+        value: this._GenerateUri(),
+        setNewSecret: this._NewSecret.bind(this),
       },
       null
     );
-    return app;
+
+    this._root.render(app);
   }
-  public updateParameters(context: ComponentFramework.Context<IInputs>): void {
-    this.application = context.parameters.Application.raw || "";
-    this.user = context.parameters.User.raw || "";
-    this.secret = context.parameters.Secret.raw || "";
+
+  private _GenerateUri(): string {
+    return `otpauth://totp/${this._application}:${encodeURIComponent(
+      this._user
+    )}?secret=${this._secret}&issuer=${this._application}&algorithm=${
+      authenticator.allOptions().algorithm
+    }&digits=${authenticator.allOptions().digits}&period=${
+      authenticator.allOptions().step
+    }`;
   }
-  public newSecret(): void {
-    this.secret = generateSecret();
+
+  private _NewSecret(): void {
+    this._secret = authenticator.generateSecret();
     this._notifyOutputChanged();
-    console.log(this.secret);
   }
 }
