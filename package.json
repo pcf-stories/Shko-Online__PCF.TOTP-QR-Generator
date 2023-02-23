@@ -1,0 +1,17 @@
+{
+    "name": "@shko.online/totp-qr-generator-workspace",
+    "private": true,
+    "workspaces": [
+        "pcf",
+        "storybook"
+    ],
+    "devDependencies": {
+        "prettier": "^2.8.4",
+        "raw-loader": "^4.0.2",
+        "replace-in-file": "^6.3.5",
+        "tsconfig-paths-webpack-plugin": "^4.0.0"
+    },
+    "scripts": {
+        "postinstall": "node uglyWorkaround.js"
+    }
+}

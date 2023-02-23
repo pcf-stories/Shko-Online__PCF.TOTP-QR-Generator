@@ -1,14 +1,29 @@
-import type { IInputs, IOutputs } from "./generated/ManifestTypes";
-import type { Root } from "react-dom/client";
+/*
+   Copyright 2023 Betim Beja and Shko Online LLC
 
-import { createElement } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
-import { authenticator } from "otplib";
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-export class TOTPQRGenerator
-  implements ComponentFramework.StandardControl<IInputs, IOutputs>
-{
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+*/
+
+import type { Root } from 'react-dom/client';
+import type { IInputs, IOutputs } from './generated/ManifestTypes';
+
+import { createElement } from 'react';
+import { createRoot } from 'react-dom/client';
+import { authenticator } from 'otplib';
+import App from './App';
+import './banner';
+
+export class TOTPQRGenerator implements ComponentFramework.StandardControl<IInputs, IOutputs> {
   private _application: string;
   private _notifyOutputChanged: () => void;
   private _root: Root;
@@ -31,7 +46,7 @@ export class TOTPQRGenerator
     context: ComponentFramework.Context<IInputs>,
     notifyOutputChanged: () => void,
     state: ComponentFramework.Dictionary,
-    container: HTMLDivElement
+    container: HTMLDivElement,
   ): void {
     this._notifyOutputChanged = notifyOutputChanged;
     this._root = createRoot(container);
@@ -59,9 +74,9 @@ export class TOTPQRGenerator
   public destroy(): void {}
 
   private _Render(context: ComponentFramework.Context<IInputs>): void {
-    this._application = context.parameters.Application.raw || "";
-    this._user = context.parameters.User.raw || "";
-    this._secret = context.parameters.Secret.raw || "";
+    this._application = context.parameters.Application.raw || '';
+    this._user = context.parameters.User.raw || '';
+    this._secret = context.parameters.Secret.raw || '';
 
     const app = createElement(
       App,
@@ -69,18 +84,16 @@ export class TOTPQRGenerator
         value: this._GenerateUri(),
         setNewSecret: this._NewSecret.bind(this),
       },
-      null
+      null,
     );
 
     this._root.render(app);
   }
 
   private _GenerateUri(): string {
-    return `otpauth://totp/${this._application}:${encodeURIComponent(
-      this._user
-    )}?secret=${this._secret}&issuer=${this._application}&algorithm=${
-      authenticator.allOptions().algorithm
-    }&digits=${authenticator.allOptions().digits}&period=${
+    return `otpauth://totp/${this._application}:${encodeURIComponent(this._user)}?secret=${this._secret}&issuer=${
+      this._application
+    }&algorithm=${authenticator.allOptions().algorithm}&digits=${authenticator.allOptions().digits}&period=${
       authenticator.allOptions().step
     }`;
   }
@@ -90,3 +103,4 @@ export class TOTPQRGenerator
     this._notifyOutputChanged();
   }
 }
+

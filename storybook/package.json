@@ -1,0 +1,27 @@
+{
+    "name": "@shko.online/totp-qr-generator-stories",
+    "private": true,
+    "scripts": {
+        "storybook": "storybook dev -p 6006",
+        "test-storybook": "test-storybook",
+        "build-storybook": "storybook build"
+    },
+    "devDependencies": {
+        "@shko.online/componentframework-mock": "^0.1.18",
+        "@storybook/addon-actions": "^7.0.0-beta.43",
+        "@storybook/addon-essentials": "^7.0.0-beta.43",
+        "@storybook/addon-interactions": "^7.0.0-beta.43",
+        "@storybook/addon-links": "^7.0.0-beta.43",
+        "@storybook/cli": "^7.0.0-beta.53",
+        "@storybook/client-api": "^7.0.0-beta.43",
+        "@storybook/jest": "^0.0.11-next.0",
+        "@storybook/react": "^7.0.0-beta.43",
+        "@storybook/react-webpack5": "^7.0.0-beta.43",
+        "@storybook/test-runner": "^0.10.0-next.8",
+        "@storybook/testing-library": "^0.0.14-next.1",
+        "@storybook/types": "^7.0.0-beta.43",
+        "eslint-plugin-storybook": "^0.6.10",
+        "storybook": "^7.0.0-beta.43",
+        "webpack": "^5.75.0"
+    }
+}
