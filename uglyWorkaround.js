@@ -9,5 +9,5 @@ replace.sync({
 replace.sync({
     files: require.resolve('pcf-scripts/tasks/startTask.js'),
     from: 'node node_modules/pcf-start/bin/pcf-start\.js',
-    to: 'node ${__dirname}/../../pcf-start/bin/pcf-start.js'
+    to: 'node "${__dirname}/../../pcf-start/bin/pcf-start.js"'
 })
