@@ -22,19 +22,20 @@ import QRCode from 'react-qr-code';
 
 const App = (props: IAppProps) => (
   <div>
-    <div style={{ display: 'flex', flexDirection: 'column' }}>
-      <QRCode value={props.value} />
+    <div className="totp.qr.container">
+      <QRCode className="totp.qr.image" value={props.value} />
       <button
         type="button"
-        style={{ maxWidth: '256px', marginTop: '4px' }}
+        className="totp.qr.overlay"
         onClick={() => {
           props.setNewSecret();
         }}
       >
-        New Secret
+        Click to generate new secret!
       </button>
     </div>
   </div>
 );
 
 export default App;
+

@@ -37,6 +37,10 @@
         path="index.ts" 
         order="1"
       />
+      <css
+        path="style.css"
+        order="1"
+      />
       <resx 
         path="strings/TOTPQRGenerator.1033.resx" 
         version="1.0.0" 

@@ -20,6 +20,7 @@ import { argTypes } from './argTypes';
 import { defaultArgs } from './defaultArgs';
 import { StoryArgs } from './StoryArgs';
 import { Decorator } from './Decorator';
+import '@shko.online/totp-qr-generator/TOTP-QR-Generator/style.css';
 
 export default {
   title: 'TOTP QR Generator',
