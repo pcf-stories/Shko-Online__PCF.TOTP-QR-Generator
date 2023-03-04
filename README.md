@@ -6,6 +6,11 @@ To use the component follow these steps:
 2. Configure the component for your Choices form controls
 3. Enjoy!
 
+This is a demo of the component:
+
+https://user-images.githubusercontent.com/11160171/222916345-ddea83d3-53f2-470f-9ec0-500404902cbe.mp4
+
+
 What does the solution contain?
 
 ![image](https://user-images.githubusercontent.com/11160171/222915101-bb91ced1-018d-4401-ac4c-5ddb293637f7.png)
