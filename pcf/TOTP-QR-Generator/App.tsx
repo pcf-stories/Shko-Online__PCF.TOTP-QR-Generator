@@ -20,22 +20,26 @@ import type { IAppProps } from './App.types';
 
 import QRCode from 'react-qr-code';
 
-const App = (props: IAppProps) => (
-  <div>
-    <div className="totp.qr.container">
-      <QRCode className="totp.qr.image" value={props.value} />
-      <button
-        type="button"
-        className="totp.qr.overlay"
-        onClick={() => {
-          props.setNewSecret();
-        }}
-      >
-        Click to generate new secret!
-      </button>
+const App = ({ disabled, setNewSecret, value, visible }: IAppProps) =>
+  visible ? (
+    <div>
+      <div className="totp.qr.container">
+        <QRCode className="totp.qr.image" value={value} />
+        <button
+          type="button"
+          className="totp.qr.overlay"
+          disabled={disabled}
+          onClick={() => {
+            setNewSecret();
+          }}
+        >
+          Click to generate new secret!
+        </button>
+      </div>
     </div>
-  </div>
-);
+  ) : (
+    <></>
+  );
 
 export default App;
 

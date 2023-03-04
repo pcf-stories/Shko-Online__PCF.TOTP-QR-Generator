@@ -42,6 +42,12 @@
     font-size: large;
 }
 
-.totp\.qr\.container:hover .totp\.qr\.overlay {
+.totp\.qr\.container:hover .totp\.qr\.overlay:not(:disabled) {
     opacity: .9;
+}
+
+.totp\.qr\.container:hover .totp\.qr\.overlay:disabled {
+    opacity: .8;
+    background-color: lightgray;
+    color: transparent;
 }

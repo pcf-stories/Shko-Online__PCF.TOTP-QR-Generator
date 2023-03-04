@@ -13,6 +13,7 @@
     },
     "scripts": {
         "postinstall": "node uglyWorkaround.js",
+        "refreshTypes": "npm run refreshTypes -w pcf",
         "storybook": "npm run storybook -w storybook"
     }
 }

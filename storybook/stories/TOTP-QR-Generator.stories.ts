@@ -23,7 +23,7 @@ import { Decorator } from './Decorator';
 import '@shko.online/totp-qr-generator/TOTP-QR-Generator/style.css';
 
 export default {
-  title: 'TOTP QR Generator',
+  title: 'TOTP QR Generator/TOTP QR Generator',
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes,
   args: defaultArgs,
@@ -34,5 +34,5 @@ export default {
   },
 } as Meta<StoryArgs>;
 
-export { Default } from './Default';
+export { Default as TOTPQRGenerator } from './Default';
 

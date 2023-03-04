@@ -36,20 +36,43 @@ const user_Name = getFromResource('User_Display_Key');
 let user_Description = getFromResource('User_Desc_Key');
 
 export const argTypes: Partial<ArgTypes<StoryArgs>> = {
+  isDisabled: {
+    name: 'Disabled',
+    table: {
+      category: 'Mode',
+      defaultValue: { summary: 'false' },
+    },
+  },
+  isVisible: {
+    name: 'Visible',
+    table: {
+      category: 'Mode',
+      defaultValue: { summary: 'true' },
+    },
+  },
   Application: {
     name: application_Name,
     description: application_Description,
     type: 'string',
+    table: {
+      category: 'Parameters',
+    },
   },
   Secret: {
     name: secret_Name,
     description: secret_Description,
     type: 'string',
+    table: {
+      category: 'Parameters',
+    },
   },
   User: {
     name: user_Name,
     description: user_Description,
     type: 'string',
+    table: {
+      category: 'Parameters',
+    },
   },
 };
 

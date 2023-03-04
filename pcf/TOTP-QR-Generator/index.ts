@@ -71,18 +71,25 @@ export class TOTPQRGenerator implements ComponentFramework.StandardControl<IInpu
     };
   }
 
-  public destroy(): void {}
+  public destroy(): void {
+    this._root.unmount();
+  }
 
   private _Render(context: ComponentFramework.Context<IInputs>): void {
     this._application = context.parameters.Application.raw || '';
     this._user = context.parameters.User.raw || '';
     this._secret = context.parameters.Secret.raw || '';
 
+    const visible = context.mode.isVisible;
+    const disabled = context.mode.isControlDisabled;
+
     const app = createElement(
       App,
       {
-        value: this._GenerateUri(),
+        disabled,
         setNewSecret: this._NewSecret.bind(this),
+        value: this._GenerateUri(),
+        visible,
       },
       null,
     );

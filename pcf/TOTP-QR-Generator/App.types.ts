@@ -15,6 +15,8 @@
 */
 
 export interface IAppProps {
+    visible: boolean,
+    disabled: boolean,
     value: string;
     setNewSecret: ()=>void
 }
