@@ -56,7 +56,6 @@ const config = {
   },
   features: {
     interactionsDebugger: true,
-    // 👈 Enable playback controls
     storyStoreV7: true
   }
 };
